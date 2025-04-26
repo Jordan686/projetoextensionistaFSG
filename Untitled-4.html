@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Campanha de Doação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+    .input-container {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .input-container span {
+      font-size: 18px;
+      margin-right: 5px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 18px;
+      width: 120px;
+      text-align: right;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="range"] {
+      width: 300px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    #qrcode {
+      margin-top: 30px;
+    }
+    .recebedor-info {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      display: inline-block;
+      text-align: left;
+    }
+    .recebedor-info h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    .recebedor-info p {
+      margin: 5px 0;
+      color: #555;
+    }
+    #impacto {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+    #mensagem-max {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contribua com a Campanha</h1>
+  <p>Insira o valor que deseja doar:</p>
+  <input type="range" id="slider" min="0" max="300" step="5" value="100">
+  <div class="input-container">
+    <span>R$</span>
+    <input type="text" id="valor" value="R$ 100,00">
+  </div>
+  <div id="mensagem-max"></div>
+  <br>
+  <button onclick="gerarQRCode()">Gerar QR Code Pix</button>
+  <div id="impacto"></div>
+  <div id="qrcode"></div>
+  <div id="copiacodigo" style="margin-top: 20px; display: none;">
+    <p><strong>Código Pix (Copiar e Colar):</strong></p>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <input type="text" id="codigoPix" readonly style="width: 80%; font-size: 16px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      <button onclick="copiarCodigo()" style="margin-left: 8px; background: none; border: none; cursor: pointer;" title="Copiar código">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#555" viewBox="0 0 24 24">
+          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <div id="recebedor" class="recebedor-info" style="display: none;">
+    <h2>Informações do Recebedor</h2>
+    <p><strong>Recebido por:</strong> Bianca Valandro</p>
+    <p><strong>Chave Pix (CPF):</strong> 549.910.246-88</p>
+  </div>
+
+  <script>
+
+
+    const slider = document.getElementById('slider');
+    const valorInput = document.getElementById('valor');
+    const impactoDiv = document.getElementById('impacto');
+    const mensagemMax = document.getElementById('mensagem-max');
+
+
+    function copiarCodigo() {
+  const input = document.getElementById('codigoPix');
+  input.select();
+  input.setSelectionRange(0, 99999); // Para dispositivos móveis
+  document.execCommand('copy');
+  alert('Código Pix copiado!');
+}
+function gerarCRC16(payload) {
+  let polinomio = 0x1021;
+  let resultado = 0xFFFF;
+
+  for (let i = 0; i < payload.length; i++) {
+    resultado ^= payload.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      if ((resultado & 0x8000) !== 0) {
+        resultado = (resultado << 1) ^ polinomio;
+      } else {
+        resultado = resultado << 1;
+      }
+      resultado &= 0xFFFF;
+    }
+  }
+
+  return resultado.toString(16).toUpperCase().padStart(4, '0');
+}
+
+    const itens = [
+      {
+        nome: 'músico',
+        preco: 300,
+        meta: 1,
+        mensagens: {
+          completo: 'Todos os {meta} {nome}',
+          parcial: '{quantidade} {nome}',
+          parcialunitario: '{valor} de {preco} reais para contratar o {nome}'
+        }
+      },
+      {
+        nome: 'docinhos',
+        preco: 0.7,
+        meta: 100,
+        mensagens: {
+          completo: 'Todos os {meta} {nome}',
+          parcial: '{quantidade} {nome}',
+          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
+        }
+      },
+      {
+        nome: 'mini pizzas',
+        preco: 0.7,
+        meta: 100,
+        mensagens: {
+          completo: 'Todos as {meta} {nome}',
+          parcial: '{quantidade} {nome}',
+          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
+        }
+      },
+      {
+        nome: 'salgados',
+        preco: 0.7,
+        meta: 200,
+        mensagens: {
+          completo: 'Todos os {meta} {nome}',
+          parcial: '{quantidade} {nome}',
+          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
+        }
+      }
+    ];
+
+    function formatarMoeda(valor) {
+      return `R$ ${valor.toFixed(2).replace('.', ',')}`;
+    }
+
+  
+
+
+    slider.addEventListener('input', () => {
+      const valor = parseInt(slider.value, 10);
+      valorInput.value = formatarMoeda(valor);
+      atualizarImpacto(valor);
+      mensagemMax.textContent = valor === parseInt(slider.max, 10)
+        ? 'Para doar valores maiores, utilize o campo numérico.'
+        : '';
+    });
+
+    valorInput.addEventListener('input', () => {
+      let valor = valorInput.value.replace('R$ ', '').replace(',', '.');
+      valor = parseFloat(valor);
+      if (!isNaN(valor)) {
+        valorInput.value = formatarMoeda(valor);
+        slider.value = valor;
+        atualizarImpacto(valor);
+      }
+    });
+
+    function gerarQRCode() {
+      const valor = parseFloat(valorInput.value.replace('R$ ', '').replace(',', '.'));
+      if (isNaN(valor) || valor < 0.01) {
+        alert('Por favor, insira um valor válido.');
+        return;
+      }
+
+      const valorFormatado = valor.toFixed(2);
+      const chave = '54991024688';
+      const nome = 'Bianca Valandro';
+      const cidade = 'Caxias do Sul';
+
+      const payload = `00020126360014BR.GOV.BCB.PIX0111${chave}0214${nome}5204000053039865405${valorFormatado}5802BR5914${nome}6013${cidade}62070503***6304`;
+      const urlQRCode = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(payload)}&size=300x300`;
+
+      document.getElementById('qrcode').innerHTML = `<img src="${urlQRCode}" alt="QR Code Pix">`;
+document.getElementById('recebedor').style.display = 'inline-block';
+
+// Exibe o código para copiar e colar
+const codigoPix = payload + gerarCRC16(payload);
+document.getElementById('codigoPix').value = codigoPix;
+document.getElementById('copiacodigo').style.display = 'block';
+
+    }
+
+    atualizarImpacto(parseFloat(slider.value));
+  </script>
+</body>
+</html>

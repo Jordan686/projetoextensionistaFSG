@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode"></script>
   <title>Campanha de Doação</title>
   <style>
     body {
@@ -77,8 +78,6 @@
     }
   </style>
 </head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <body>
   <h1>Contribua com a Campanha</h1>
   <p>Insira o valor que deseja doar:</p>
@@ -103,105 +102,42 @@
       </button>
     </div>
   </div>
-  
+
   <div id="recebedor" class="recebedor-info" style="display: none;">
     <h2>Informações do Recebedor</h2>
     <p><strong>Recebido por:</strong> Bianca Valandro</p>
-    <p><strong>Chave Pix (número):</strong> 54991024688</p>
+    <p><strong>Chave Pix (E-mail):</strong> biancavalandro977@hotmail.com</p>
   </div>
 
   <script>
-
-
     const slider = document.getElementById('slider');
     const valorInput = document.getElementById('valor');
     const impactoDiv = document.getElementById('impacto');
     const mensagemMax = document.getElementById('mensagem-max');
 
-
     function copiarCodigo() {
-  const input = document.getElementById('codigoPix');
-  input.select();
-  input.setSelectionRange(0, 99999); // Para dispositivos móveis
-  document.execCommand('copy');
-  alert('Código Pix copiado!');
-}
-function gerarCRC16(payload) {
-  let polinomio = 0x1021;
-  let resultado = 0xFFFF;
-
-  for (let i = 0; i < payload.length; i++) {
-    resultado ^= payload.charCodeAt(i) << 8;
-    for (let j = 0; j < 8; j++) {
-      if ((resultado & 0x8000) !== 0) {
-        resultado = (resultado << 1) ^ polinomio;
-      } else {
-        resultado = resultado << 1;
-      }
-      resultado &= 0xFFFF;
+      const input = document.getElementById('codigoPix');
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert('Código Pix copiado!');
     }
-  }
-
-  return resultado.toString(16).toUpperCase().padStart(4, '0');
-}
 
     const itens = [
-      {
-        nome: 'músico',
-        preco: 300,
-        meta: 1,
-        mensagens: {
-          completo: 'Todos os {meta} {nome}',
-          parcial: '{quantidade} {nome}',
-          parcialunitario: '{valor} de {preco} reais para contratar o {nome}'
-        }
-      },
-      {
-        nome: 'docinhos',
-        preco: 0.7,
-        meta: 100,
-        mensagens: {
-          completo: 'Todos os {meta} {nome}',
-          parcial: '{quantidade} {nome}',
-          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
-        }
-      },
-      {
-        nome: 'mini pizzas',
-        preco: 0.7,
-        meta: 100,
-        mensagens: {
-          completo: 'Todos as {meta} {nome}',
-          parcial: '{quantidade} {nome}',
-          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
-        }
-      },
-      {
-        nome: 'salgados',
-        preco: 0.7,
-        meta: 200,
-        mensagens: {
-          completo: 'Todos os {meta} {nome}',
-          parcial: '{quantidade} {nome}',
-          parcialunitario: '{valor} de {preco} reais para comprar {nome}'
-        }
-      }
+      { nome: 'músico', preco: 300, meta: 1, mensagens: { completo: 'Todos os {meta} {nome}', parcial: '{quantidade} {nome}', parcialunitario: '{valor} de {preco} reais para contratar o {nome}' } },
+      { nome: 'docinhos', preco: 0.7, meta: 100, mensagens: { completo: 'Todos os {meta} {nome}', parcial: '{quantidade} {nome}', parcialunitario: '{valor} de {preco} reais para comprar {nome}' } },
+      { nome: 'mini pizzas', preco: 0.7, meta: 100, mensagens: { completo: 'Todos as {meta} {nome}', parcial: '{quantidade} {nome}', parcialunitario: '{valor} de {preco} reais para comprar {nome}' } },
+      { nome: 'salgados', preco: 0.7, meta: 200, mensagens: { completo: 'Todos os {meta} {nome}', parcial: '{quantidade} {nome}', parcialunitario: '{valor} de {preco} reais para comprar {nome}' } }
     ];
 
     function formatarMoeda(valor) {
       return `R$ ${valor.toFixed(2).replace('.', ',')}`;
     }
 
-  
-
-
     slider.addEventListener('input', () => {
       const valor = parseInt(slider.value, 10);
       valorInput.value = formatarMoeda(valor);
-      atualizarImpacto(valor);
-      mensagemMax.textContent = valor === parseInt(slider.max, 10)
-        ? 'Para doar valores maiores, utilize o campo numérico.'
-        : '';
+      mensagemMax.textContent = valor === parseInt(slider.max, 10) ? 'Para doar valores maiores, utilize o campo numérico.' : '';
     });
 
     valorInput.addEventListener('input', () => {
@@ -210,9 +146,49 @@ function gerarCRC16(payload) {
       if (!isNaN(valor)) {
         valorInput.value = formatarMoeda(valor);
         slider.value = valor;
-        atualizarImpacto(valor);
       }
     });
+
+    function pad2(num) {
+      return String(num).padStart(2, '0');
+    }
+
+    function computeCrc(str) {
+      let data = str + '6304';
+      let crc = 0xFFFF;
+      for (let i = 0; i < data.length; i++) {
+        crc ^= data.charCodeAt(i) << 8;
+        for (let j = 0; j < 8; j++) {
+          crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+        }
+      }
+      return crc.toString(16).toUpperCase().padStart(4, '0');
+    }
+
+    function montarPayloadPix(chave, nome, cidade, valor) {
+      let payload = '';
+      payload += '00' + '02' + '01';
+      let gui = 'BR.GOV.BCB.PIX';
+      let sub = '';
+      sub += '00' + pad2(gui.length) + gui;
+      sub += '01' + pad2(chave.length) + chave;
+      payload += '26' + pad2(sub.length) + sub;
+      payload += '52' + '04' + '0000';
+      payload += '53' + '03' + '986';
+      if (valor && valor !== '0.00') {
+        let vstr = valor.toFixed(2);
+        payload += '54' + pad2(vstr.length) + vstr;
+      }
+      payload += '58' + '02' + 'BR';
+      payload += '59' + pad2(nome.length) + nome;
+      payload += '60' + pad2(cidade.length) + cidade;
+      let txid = '***';
+      let ad = '05' + pad2(txid.length) + txid;
+      payload += '62' + pad2(ad.length) + ad;
+      let crc = computeCrc(payload);
+      payload += '63' + '04' + crc;
+      return payload;
+    }
 
     function gerarQRCode() {
       const valor = parseFloat(valorInput.value.replace('R$ ', '').replace(',', '.'));
@@ -221,25 +197,19 @@ function gerarCRC16(payload) {
         return;
       }
 
-      const valorFormatado = valor.toFixed(2);
-      const chave = '54991024688';
-      const nome = 'Bianca Valandro';
+      const chave = 'biancavalandro977@hotmail.com';
+      const nome = 'Bianca da Silva Valandro';
       const cidade = 'Caxias do Sul';
 
-      const payload = `00020126360014BR.GOV.BCB.PIX0111${chave}0214${nome}5204000053039865405${valorFormatado}5802BR5914${nome}6013${cidade}62070503***6304`;
+      const payload = montarPayloadPix(chave, nome, cidade, valor);
       const urlQRCode = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(payload)}&size=300x300`;
 
       document.getElementById('qrcode').innerHTML = `<img src="${urlQRCode}" alt="QR Code Pix">`;
-document.getElementById('recebedor').style.display = 'inline-block';
+      document.getElementById('recebedor').style.display = 'inline-block';
 
-// Exibe o código para copiar e colar
-const codigoPix = payload + gerarCRC16(payload);
-document.getElementById('codigoPix').value = codigoPix;
-document.getElementById('copiacodigo').style.display = 'block';
-
+      document.getElementById('codigoPix').value = payload;
+      document.getElementById('copiacodigo').style.display = 'block';
     }
-
-    atualizarImpacto(parseFloat(slider.value));
   </script>
 </body>
 </html>

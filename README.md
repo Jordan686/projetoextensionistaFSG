@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 Select Language / Selecionar Idioma
+# Select Language / Selecionar Idioma
 
 <br>
 

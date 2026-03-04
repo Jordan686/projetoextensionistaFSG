@@ -4,7 +4,7 @@
 
 <br>
 
-<a href="/tree">
+<a href="./">
   <img src="https://img.shields.io/badge/English-Click%20Here-blue?style=for-the-badge" alt="English">
 </a>
 

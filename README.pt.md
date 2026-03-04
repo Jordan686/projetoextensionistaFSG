@@ -19,9 +19,21 @@ Para que todos os integrantes do grupo, que haviam idades variadas, pudessem pre
 
 <img width="852" height="313" alt="image" src="https://github.com/user-attachments/assets/46454d0e-ae9a-4698-8e57-f19c5f1d8132" />
 
+Adicionavam PDFs novos ao acervo
+<img width="732" height="289" alt="image" src="https://github.com/user-attachments/assets/c2e3b897-2b36-48c4-b1db-f602ecffca68" />
+E gerencia-lo:
+<img width="805" height="495" alt="image" src="https://github.com/user-attachments/assets/691375df-b9ea-47de-9235-3e62c6800922" />
+
+
+Podiam criar diferentes marcadores para o índice, e alterar suas ordens:
+<img width="717" height="242" alt="image" src="https://github.com/user-attachments/assets/5e6a4eca-7f37-4f04-8afa-7da2b406f4c4" />
+
+
 Através de um sistema de "regras" podiam escolher quais páginas iriam constituir um marcador do índice, e definir a ordem do conteúdo.
 
-<img width="766" height="763" alt="image" src="https://github.com/user-attachments/assets/81fa855d-6483-451e-a9d3-e68cfbd59f9e" />
+<img width="697" height="701" alt="image" src="https://github.com/user-attachments/assets/4949960e-9caf-4e71-a1da-0da05b303296" />
+<img width="756" height="607" alt="image" src="https://github.com/user-attachments/assets/1327295b-2762-4cd2-ace0-4c9c31f0f619" />
+<img width="702" height="720" alt="image" src="https://github.com/user-attachments/assets/e9a2eef3-8414-4e43-bdc0-b7cb83e83f39" />
 
 
 

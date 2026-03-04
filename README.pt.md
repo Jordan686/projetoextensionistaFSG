@@ -1,10 +1,10 @@
-# 🏥 Campanha de Conscientização – UBS
+#  Campanha de Conscientização – UBS
 
 Após entrevista com funcionários da UBS e levantamento de suas necessidades, decidiu-se pela criação de uma campanha de conscientização, contando com um site informativo que reunisse o conteúdo que desejavam transmitir.
 
 ---
 
-## 🌐 Site Informativo
+##  Site Informativo
 
 O site possui compatibilidade tanto para mobile quanto para desktop, com funcionalidade de cache para evitar uso excessivo de tráfego ao baixar o conteúdo, ajustando-se para manter leitura adequada independentemente do dispositivo utilizado para acesso.
 
@@ -26,7 +26,7 @@ Por fim, havia uma funcionalidade de avaliação, permitindo que os visitantes d
 
 ---
 
-## 📊 Apresentação
+##  Apresentação
 
 Utilizando Python, foram realizados plottings sobre as avaliações coletadas para a apresentação do projeto após sua conclusão.
 
@@ -36,7 +36,7 @@ Utilizando Python, foram realizados plottings sobre as avaliações coletadas pa
 
 ---
 
-## 🛠️ Página de Administrador
+##  Página de Administrador
 
 Para que todos os integrantes do grupo, com diferentes níveis de familiaridade tecnológica, pudessem preencher e alterar o conteúdo do site conforme necessário, optou-se pelo uso de arquivos em formato PDF como base do conteúdo, juntamente com a criação de uma página de administrador.
 
@@ -82,4 +82,11 @@ Também era possível editar marcadores já existentes, alterar suas ordens ou e
 
 ---
 
-## ✅ Realização
+##  Realização
+
+Foi feito um banner, que foi colocado para exposição, e panfletos, que o grupo distribuiu para as pessoas na rua.
+<img width="1220" height="1476" alt="image" src="https://github.com/user-attachments/assets/c6f6ec63-92b1-4958-bbf0-0817e2ce0134" />
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/1187a29f-e309-402d-804e-02b232400f05" />
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/3c15fa62-8ca4-4905-9428-c1c86cbdbcf8" />
+
+

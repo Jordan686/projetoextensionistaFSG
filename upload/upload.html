@@ -238,7 +238,7 @@ const tokenInput = document.getElementById('token'),
       refreshBtn = document.getElementById('atualizar')
 
 const MAX_BYTES = 20*1024*1024,
-      OWNER='jordan-ramos0', REPO='projetoextensaofsg2-main', BRANCH='master',
+      OWNER='jordan-ramos0', REPO='projetoextensionistaFSG', BRANCH='master',
       KEY_TOKEN='powerautomation'
 
 let token = localStorage.getItem(KEY_TOKEN) || ''
@@ -833,7 +833,7 @@ function promptAddArquivoToSection(section) {
 
 
 /* inicialização dos botões */
-addArquivoMobileBtn.onclick = ()=> promptAddArquivoToSection('mobile');
+addArquivoMobileBtn.onclick = ()=> mptAddArquivoToSection('mobile');
 addArquivoDesktopBtn.onclick = ()=> promptAddArquivoToSection('desktop');
 
 /* Exponha função para quando a lista `arquivos` for atualizada */
@@ -914,7 +914,7 @@ function solveRules(sectionFiles, pdfLengths = {}, maxPages = 100) {
 async function renderPreviewFromSolved(container, solvedPages) {
     container.innerHTML = '';
     for(const item of solvedPages){
-        const fileUrl = `/projetoextensaofsg2-main/pdfs/${item.fileName}`;
+        const fileUrl = `/projetoextensionistaFSG/pdfs/${item.fileName}`;
         const loading = pdfjsLib.getDocument(fileUrl);
         const pdf = await loading.promise;
 
@@ -959,7 +959,7 @@ async function renderPreviewFromSolved(container, solvedPages) {
     container.style.justifyItems = 'center';
 
     for(const item of solvedPages){
-        const fileUrl = `/projetoextensaofsg2-main/pdfs/${item.fileName}`;
+        const fileUrl = `/projetoextensionistaFSG/pdfs/${item.fileName}`;
         const loading = pdfjsLib.getDocument(fileUrl);
         const pdf = await loading.promise;
 
@@ -1006,7 +1006,7 @@ async function renderSectionWithSolverPreview(section){
 
     for(const fileObj of sectionFiles){
         const fileName = fileObj.fileName;
-        const fileUrl = `/projetoextensaofsg2-main/pdfs/${fileName}`;
+        const fileUrl = `/projetoextensionistaFSG/pdfs/${fileName}`;
         const pdf = await pdfjsLib.getDocument(fileUrl).promise;
         pdfLengths[fileName] = pdf.numPages;
         pdf.destroy();
@@ -1210,3 +1210,4 @@ refreshBtn.onclick = async () => {
 
 </body>
 </html>
+

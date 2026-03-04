@@ -56,7 +56,7 @@ Using Python, plots were generated based on the collected evaluations for the fi
 
 To allow all group members, with different levels of technological familiarity, to update and modify the website content as needed, PDF files were chosen as the content format, along with the development of an admin page.
 
-The project did not include a traditional back-end. Changes were made using a repository API token made available to the group, allowing modifications to the PDF collection.
+The project did not include a traditional back-end. Changes were made using a repository API token made available to the group, that would need to be typed in the page, allowing an interface for modifications to the PDF collection.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/46454d0e-ae9a-4698-8e57-f19c5f1d8132" width="600">

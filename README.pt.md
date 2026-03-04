@@ -86,7 +86,6 @@ Também era possível editar marcadores já existentes, alterar suas ordens ou e
 
 Foi feito um banner, que foi colocado para exposição, e panfletos, que o grupo distribuiu para as pessoas na rua.
 <img width="1220" height="1476" alt="image" src="https://github.com/user-attachments/assets/c6f6ec63-92b1-4958-bbf0-0817e2ce0134" />
-<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/1187a29f-e309-402d-804e-02b232400f05" />
 <img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/3c15fa62-8ca4-4905-9428-c1c86cbdbcf8" />
-
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/1187a29f-e309-402d-804e-02b232400f05" />
 

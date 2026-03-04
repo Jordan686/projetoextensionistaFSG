@@ -14,13 +14,13 @@
 
 </div>
 
-# 🏥 Awareness Campaign – UBS Rio Branco
+#  Awareness Campaign – UBS Rio Branco
 
 After interviewing staff members at **UBS Rio Branco (Unidade Básica de Saúde – a public primary healthcare clinic in Brazil)** and gathering their needs, it was decided to create an awareness campaign supported by an informational website containing the content they wanted to communicate.
 
 ---
 
-## 🌐 Informational Website
+##  Informational Website
 
 The website is compatible with both mobile and desktop devices, featuring a caching system to prevent excessive data usage when loading content, and automatically adjusting to maintain proper readability regardless of the device used for access.
 
@@ -42,7 +42,7 @@ Finally, a rating feature was implemented, allowing clinic visitors to leave fee
 
 ---
 
-## 📊 Presentation
+##  Presentation
 
 Using Python, plots were generated based on the collected evaluations for the final project presentation.
 
@@ -52,7 +52,7 @@ Using Python, plots were generated based on the collected evaluations for the fi
 
 ---
 
-## 🛠️ Admin Page
+##  Admin Page
 
 To allow all group members, with different levels of technological familiarity, to update and modify the website content as needed, PDF files were chosen as the content format, along with the development of an admin page.
 
@@ -98,7 +98,7 @@ It was also possible to edit existing markers, change their order, or delete the
 
 ---
 
-## 📢 Implementation
+##  Implementation
 
 A banner was produced for public display, along with flyers that the group distributed to people in the surrounding area.
 

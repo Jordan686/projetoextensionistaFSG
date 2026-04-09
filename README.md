@@ -14,7 +14,7 @@
 
 </div>
 
-#  Awareness Campaign – UBS Rio Branco
+#  Health Awareness Campaign - UBS Rio Branco
 
 After interviewing staff members at **UBS Rio Branco (Unidade Básica de Saúde - a public primary healthcare clinic in Brazil)** and gathering their needs, it was decided to create an awareness campaign supported by an informational website containing the content they wanted to communicate.
 
